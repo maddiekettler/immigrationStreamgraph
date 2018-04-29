@@ -38,22 +38,13 @@ button {
 
 <script>
 
-chart("data.csv", "orange");
-
-
+chart("newData.csv", "green");
 
 var datearray = [];
 var colorrange = [];
 
-
+///set colors
 function chart(csvpath, color) {
-
-  function convert(d) {
-    return {
-      date: new Date(d.date),
-      value: +d.value         // convert string to number
-    };
-  }
 
 if (color == "blue") {
   colorrange = ["#045A8D", "#2B8CBE", "#74A9CF", "#A6BDDB", "#D0D1E6", "#F1EEF6"];
@@ -64,9 +55,12 @@ else if (color == "pink") {
 else if (color == "orange") {
   colorrange = ["#B30000", "#E34A33", "#FC8D59", "#FDBB84", "#FDD49E", "#FEF0D9"];
 }
+else{
+  colorrange = ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462","#b3de69", "#fccde5"];
+}
 strokecolor = colorrange[0];
 
-var format = d3.time.format("%y");
+//var format = d3.time.format("%m/%d/%y");
 
 var margin = {top: 20, right: 40, bottom: 30, left: 30};
 var width = document.body.clientWidth - margin.left - margin.right;
@@ -93,7 +87,10 @@ var z = d3.scale.ordinal()
 var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom")
-    .ticks(d3.time.weeks);
+    .tickValues([1820,1830,1840,1850,1860,1870,1880,1890,1900,1910,1920,1930,1940,1950,1960,1970,1980,1990,2000,2010])
+    .tickFormat(function(n) {return n});
+    //.ticks(d3.date, 20);
+    //.ticks(d3.time.weeks);
 
 var yAxis = d3.svg.axis()
     .scale(y);
@@ -124,8 +121,10 @@ var svg = d3.select(".chart").append("svg")
 
 var graph = d3.csv(csvpath, function(data) {
   data.forEach(function(d) {
-    d.date = d.date;
+    //d.date = format.parse(d.date);
+    d.date=d.date;
     d.value = +d.value;
+
   });
 
   var layers = stack(nest.entries(data));
@@ -182,7 +181,7 @@ var graph = d3.csv(csvpath, function(data) {
       .classed("hover", true)
       .attr("stroke", strokecolor)
       .attr("stroke-width", "0.5px"),
-      tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "visible");
+      tooltip.html( "<p>" +d.key + "</p>" ).style("visibility", "visible");
 
     })
     .on("mouseout", function(d, i) {
@@ -192,7 +191,7 @@ var graph = d3.csv(csvpath, function(data) {
       .attr("opacity", "1");
       d3.select(this)
       .classed("hover", false)
-      .attr("stroke-width", "0px"), tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "hidden");
+      .attr("stroke-width", "0px"), tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "visible");
   })
 
   var vertical = d3.select(".chart")

@@ -38,7 +38,7 @@ button {
 
 <script>
 
-chart("newData.csv", "alt");
+chart("newData2.csv", "alt");
 
 var datearray = [];
 var colorrange = [];
@@ -119,7 +119,7 @@ var graph = d3.csv(csvpath, function(data) {
   var layers = stack(nest.entries(data));
 
   x.domain(d3.extent(data, function(d) { return d.date; }));
-  y.domain([0, d3.max(data, function(d) { return d.y0 + d.y; })]);
+  y.domain([0, d3.max(data, function(d) { return d.y0 + d.y + (0.7 * d.y); })]);
 
   svg.selectAll(".layer")
       .data(layers)

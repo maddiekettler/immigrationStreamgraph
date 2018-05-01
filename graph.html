@@ -38,22 +38,15 @@ button {
 
 <script>
 
-chart("newData2.csv", "green");
+chart("newData.csv", "alt");
 
 var datearray = [];
 var colorrange = [];
 
-///set colors
 function chart(csvpath, color) {
 
-    if (color == "blue") {
-      colorrange = ["#045A8D", "#2B8CBE", "#74A9CF", "#A6BDDB", "#D0D1E6", "#F1EEF6"];
-    }
-    else if (color == "pink") {
-      colorrange = ["#980043", "#DD1C77", "#DF65B0", "#C994C7", "#D4B9DA", "#F1EEF6"];
-    }
-    else if (color == "orange") {
-      colorrange = ["#B30000", "#E34A33", "#FC8D59", "#FDBB84", "#FDD49E", "#FEF0D9"];
+    if (color == "alt") {
+      colorrange = ["#880015", "#fea99c", "#ff7f27", "#efe4b0", "#22b14c", "#b8f1ee", "#3f48cc", "#c8bfe7"];
     }
     else {
       colorrange = ["#377eb8", "#984ea3", "#e41a1c", "#ffff33", "#4daf4a", "#a65628","#a65628", "#f781bf"];
@@ -85,12 +78,11 @@ var z = d3.scale.ordinal()
 var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom")
-    .tickValues([1820,1830,1840,1850,1860,1870,1880,1890,1900,1910,1920,1930,1940,1950,1960,1970,1980,1990,2000])
+    .tickValues([1820,1830,1840,1850,1860,1870,1880,1890,1900,1910,1920,1930,1940,1950,1960,1970,1980,1990,2000,2010])
     .tickFormat(function(n) {return n});
 
 var yAxis = d3.svg.axis()
     .scale(y)
-    //.tickValues(["1M","2M","3M","4M","5M","6M","7M","8M","9M","10M","11M","12M"])
     .tickFormat(function(n) {n = n.toString(); n = n.replace(/0+$/,''); n += "M"; return n;});
 
 var yAxisr = d3.svg.axis()

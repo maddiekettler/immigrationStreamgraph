@@ -38,7 +38,7 @@ button {
 
 <script>
 
-chart("newData.csv", "green");
+chart("newData2.csv", "green");
 
 var datearray = [];
 var colorrange = [];
@@ -87,7 +87,7 @@ var z = d3.scale.ordinal()
 var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom")
-    .tickValues([1820,1830,1840,1850,1860,1870,1880,1890,1900,1910,1920,1930,1940,1950,1960,1970,1980,1990,2000,2010])
+    .tickValues([1820,1830,1840,1850,1860,1870,1880,1890,1900,1910,1920,1930,1940,1950,1960,1970,1980,1990,2000])
     .tickFormat(function(n) {return n});
     //.ticks(d3.date, 20);
     //.ticks(d3.time.weeks);
@@ -99,7 +99,7 @@ var yAxisr = d3.svg.axis()
     .scale(y);
 
 var stack = d3.layout.stack()
-    .offset("silhouette")
+    .offset("zero")
     .values(function(d) { return d.values; })
     .x(function(d) { return d.date; })
     .y(function(d) { return d.value; });
